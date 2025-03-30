@@ -15,12 +15,16 @@ public class MovieTheatresManagementApplication {
     }
 
     @Bean
-    public CommandLineRunner testDatabase(UserRepository userRepository) {
-        return args -> {
+public CommandLineRunner testDatabase(UserRepository userRepository) {
+    return args -> {
+        try {
             System.out.println("Users in database:");
             for (User user : userRepository.findAll()) {
                 System.out.println("User ID: " + user.getUserId() + " Username: " + user.getUsername());
             }
-        };
-    }
+        } catch (Exception e) {
+            System.err.println("Error accessing the database: " + e.getMessage());
+        }
+    };
+}
 }
